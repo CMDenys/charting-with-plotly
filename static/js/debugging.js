@@ -1,11 +1,12 @@
-// Use d3.json() to fetch data from JSON file
-function buildMetaData(sample) {
 
-    
+// Use d3.json() to fetch data from JSON file
+
+// function buildMetaData(sample) {
+
     // 1 - make sure we are able to read data - all done with function
     //     commented out
     //--------------------------------------------------------------------
-    // d3.json("../../data/samples.json").then((data) => {
+    d3.json("../../data/samples.json").then((data) => {
     //     console.log(data)
         
     // 2 - use variable to define metadata and filter for id.  Since we need
@@ -39,17 +40,51 @@ function buildMetaData(sample) {
     // 4 - remove the sample id used and uncomment the function.
 
 
-    d3.json("../../data/samples.json").then((data) => {
-        var metaData = data.metadata
-        var sampleOutput = metaData.filter(x => x.id === sample);
-        var result = sampleOutput[0]
-        var panel = d3.select("#sample-metadata")
-        panel.html("")
-        Object.entries(result).forEach(([key,value])=> {
-            panel.append("h6").text(`${key.toUpperCase()} : ${value}`);
-        })
-        console.log(result)
+    // d3.json("../../data/samples.json").then((data) => {
+       
+    //     var sample = 940
+    //     var metaData = data.metadata
+    //     var sampleOutput = metaData.filter(x => x.id === sample);
+    //     var result = sampleOutput[0]
+    //     var panel = d3.select("#sample-metadata")
+    //     panel.html("")
+    //     Object.entries(result).forEach(([key,value])=> {
+    //         panel.append("h6").text(`${key.toUpperCase()} : ${value}`);
+    //     })
+    //     console.log(result)
+
+    // });
+    
+    
+    // function buildTable (sample) { 
+    sampleID = 940
+    console.log(sampleID)
+    var idSamp = data.samples.filter(x => (x.id) == sampleID)
+    var sampValues = idSamp[0].sample_values.slice(0,10)
+    sampValues = sampValues.reverse()
+    console.log(sampValues)
+    var otuValues = idSamp[0].otu_ids.slice(0,10)
+    otuValues = otuValues.reverse()
+    console.log(otuValues)
 
 
-    });
-};
+    var trace = {
+        x: sampValues,
+        y: otuValues,
+        mode: "markers",
+        marker: {size:14},
+        text: otuValues,
+        type: "bar",
+        orientation: "h"
+    };
+
+    var data1 = [trace];
+    var layout = {
+        title: `Top 10 OTUs Found in ID ${sampleID}`,
+        xaxis: { title: "Sample Values" },
+        yaxis: { title: "OTU IDs" },
+    };
+      
+    Plotly.newPlot("bar", data1, layout)
+
+})

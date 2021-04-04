@@ -1,7 +1,8 @@
 // Use d3.json() to fetch data from JSON file
-// function buildMetaData(sample) {
 
-    var sample = 940
+function buildMetaData(sample) {
+
+    
     d3.json("../../data/samples.json").then((data) => {
         var metaData = data.metadata
         var sampleOutput = metaData.filter(x => x.id === sample);
@@ -15,4 +16,8 @@
 
 
     });
-// };
+};
+
+// create init function
+// create option change 
+// then create build chart - metadata should change with option function.  
