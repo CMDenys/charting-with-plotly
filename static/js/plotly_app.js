@@ -1,5 +1,6 @@
 // Use d3.json() to fetch data from JSON file
 
+///// --------------MetaData------------------/////
 // function buildMetaData(sample) {
 
     sample = 940
@@ -15,7 +16,7 @@
    
     });
 
-
+    ///// ----------- BAR CHART ----------------/////
     // function buildTable {
     sampleID = 940
     d3.json("../../data/samples.json").then((data) => {
@@ -27,12 +28,13 @@
         otuValues = otuValues.reverse()
         console.log(otuValues)
 
+        
 
         var trace = {
             x: sampValues,
             y: otuValues,
             mode: "markers",
-            marker: {size:14},
+            marker: {size:10},
             text: otuValues,
             type: "bar",
             orientation: "h"
@@ -47,6 +49,44 @@
         
         Plotly.newPlot("bar", data1, layout)
     });
+
+    ///// ----------- Bubble Chart----------------/////
+
+    sampleID = 940
+    d3.json("../../data/samples.json").then((data) => {
+        var idSamp = data.samples.filter(x => (parseInt(x.id)) === sampleID)
+        var indivSampValue = idSamp[0].sample_values
+        console.log(indivSampValue)
+        var indivOtuValue = idSamp[0].otu_ids
+  
+    
+        var trace1 = {
+            x: indivSampValue,
+            y: indivOtuValue,
+            mode: 'markers',
+            marker: {
+              size: indivSampValue,
+              color: indivOtuValue
+            },
+            text: indivOtuValue
+          };
+          
+          var data2 = [trace1];
+          
+          var layout = {
+            title: "OTU ID",
+            showlegend: false,
+            height: 600,
+            width: 1000
+          };
+          
+          Plotly.newPlot("bubble", data2, layout);
+
+
+
+    });
+
+
 // })
 
 // create init function
