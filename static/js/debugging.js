@@ -6,7 +6,7 @@
     // 1 - make sure we are able to read data - all done with function
     //     commented out
     //--------------------------------------------------------------------
-    d3.json("../../data/samples.json").then((data) => {
+    // d3.json("../../data/samples.json").then((data) => {
     //     console.log(data)
         
     // 2 - use variable to define metadata and filter for id.  Since we need
@@ -57,34 +57,59 @@
     
     
     // function buildTable (sample) { 
-    sampleID = 940
-    console.log(sampleID)
-    var idSamp = data.samples.filter(x => (x.id) == sampleID)
-    var sampValues = idSamp[0].sample_values.slice(0,10)
-    sampValues = sampValues.reverse()
-    console.log(sampValues)
-    var otuValues = idSamp[0].otu_ids.slice(0,10)
-    otuValues = otuValues.reverse()
-    console.log(otuValues)
+//     sampleID = 940
+//     console.log(sampleID)
+//     var idSamp = data.samples.filter(x => (x.id) == sampleID)
+//     var sampValues = idSamp[0].sample_values.slice(0,10)
+//     sampValues = sampValues.reverse()
+//     console.log(sampValues)
+//     var otuValues = idSamp[0].otu_ids.slice(0,10)
+//     otuValues = otuValues.reverse()
+//     console.log(otuValues)
 
 
-    var trace = {
-        x: sampValues,
-        y: otuValues,
-        mode: "markers",
-        marker: {size:14},
-        text: otuValues,
-        type: "bar",
-        orientation: "h"
-    };
+//     var trace = {
+//         x: sampValues,
+//         y: otuValues,
+//         mode: "markers",
+//         marker: {size:14},
+//         text: otuValues,
+//         type: "bar",
+//         orientation: "h"
+//     };
 
-    var data1 = [trace];
-    var layout = {
-        title: `Top 10 OTUs Found in ID ${sampleID}`,
-        xaxis: { title: "Sample Values" },
-        yaxis: { title: "OTU IDs" },
-    };
+//     var data1 = [trace];
+//     var layout = {
+//         title: `Top 10 OTUs Found in ID ${sampleID}`,
+//         xaxis: { title: "Sample Values" },
+//         yaxis: { title: "OTU IDs" },
+//     };
       
-    Plotly.newPlot("bar", data1, layout)
+//     Plotly.newPlot("bar", data1, layout)
 
-})
+// })
+
+//build optionChanged function
+
+// function optionChanged(sample) {
+    // var sample = 940
+    d3.json("../../data/samples.json").then((data) => {
+        //clear dropdown menu
+        sampleID = 940
+        console.log(data)
+
+        var idSamp = data.samples.filter(x => (parseInt(x.id)) === sampleID)
+        var indivSampValue = idSamp[0].sample_values
+        
+        
+        var labels = Object.values(data.sample_values)
+        var labelsII = Object.keys(data.samples)
+        console.log(labels)
+        console.log(labelsII)
+
+
+
+    })
+    
+    
+   
