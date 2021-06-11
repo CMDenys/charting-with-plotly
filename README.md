@@ -12,7 +12,6 @@ The dashboard was deployed using Github Pages and can be found at https://cmdeny
   <li>A Bar Chart</li>
   <li>A Bubble Chart</li>
   <li>A Dropdown Menu</li>
-  <li>Item Price</li>
 </ul>
 </p>
 <br clear="right"/>
